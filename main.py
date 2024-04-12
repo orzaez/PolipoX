@@ -57,14 +57,14 @@ def transcode_audio(filename):
     # or run on CPU with INT8
     model = WhisperModel(model_size, device="cpu", compute_type="int8")
 
-    segments, info = model.transcribe(filename, beam_size=1, language="es")
+    segments, info = model.transcribe(filename, beam_size=3, language="es")
 
     for segment in segments:
         print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
 
 address = "C8:9B:D7:DD:B0:E8"  
 filename = "./temp/grabacion.wav"
-duration = 3
+duration = 7
 
 grabar_audio(address, filename, duration)
 transcode_audio(filename)

@@ -1,2 +1,4 @@
 faster_whisper_env
 temp
+venv
+__pycache__
