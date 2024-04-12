@@ -2,6 +2,7 @@ import pyaudio
 import wave
 import pyttsx3
 from faster_whisper import WhisperModel
+import tkinter as tk
 
 def grabar_audio(address, filename, duration):
     p = pyaudio.PyAudio()
@@ -60,11 +61,37 @@ def transcode_audio(filename):
     segments, info = model.transcribe(filename, beam_size=3, language="es")
 
     for segment in segments:
-        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
+         return segment.text
+        
+
+def decode_transcription(transcription):
+  cadena_sin_comas = transcription.replace(",", "")
+  
+  cadena_mayusculas = cadena_sin_comas.upper()
+  
+  return cadena_mayusculas
+
+def check_there_is_command(command, decoded_transcription):
+    return command in decoded_transcription
+
 
 address = "C8:9B:D7:DD:B0:E8"  
 filename = "./temp/grabacion.wav"
 duration = 7
 
 grabar_audio(address, filename, duration)
-transcode_audio(filename)
+
+
+transcription = transcode_audio(filename)
+
+decoded_transcription = decode_transcription(transcription)
+
+print(decoded_transcription)
+
+if(check_there_is_command("REGISTRAR", decoded_transcription)):
+    print("Registrando polipo...")
+
+print("Saliendo...")
+
+
+

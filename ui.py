@@ -1,25 +1,42 @@
 import tkinter as tk
+from tkinter import font as tkfont
 
-# Función para iniciar el registro
+# Ruta de la imagen del logo (reemplazar con la ruta real)
+LOGO_PATH = "images/logo.png"
+
+# Función para iniciar el proceso de registro (a implementar)
 def iniciar_registro():
-  # Acciones para iniciar el registro del polipo
-  print("Iniciando registro...")
+    # Implementar la lógica para iniciar el proceso de registro de voz
+    pass
 
-# Crear la ventana principal
+# Configuración de la ventana
 ventana = tk.Tk()
-ventana.title("UWU")
+ventana.title("Registro de voz")
+ventana.attributes("-fullscreen", True)
+ventana.geometry("+{}+{}".format(0, 0))
+ventana.config(background="#ffffff")  # Color de fondo blanco
+# width= ventana.winfo_screenwidth()               
+# height= ventana.winfo_screenheight()               
+# ventana.geometry("%dx%d" % (width, height))
 
-# Crear un widget de marco para contener la pantalla de inicio
-marco_inicio = tk.Frame(ventana)
-marco_inicio.pack(padx=10, pady=10)
+# Carga del logo
+logo_img = tk.PhotoImage(file=LOGO_PATH)
+logo_label = tk.Label(ventana, image=logo_img, borderwidth=0)
+logo_label.pack(pady=20)
 
-# Crear una etiqueta con el mensaje de bienvenida
-etiqueta_bienvenida = tk.Label(marco_inicio, text="UWUSSSSSSSSSSSSSSS")
-etiqueta_bienvenida.pack()
+# Texto principal
+fuente_titulo = tkfont.Font(family="Arial", size=48, weight="bold")
+texto_titulo = tk.Label(ventana, text="Preparado para registrar", font=fuente_titulo, foreground="#007bff")
+texto_titulo.pack(pady=50)
 
-# Crear un botón para iniciar el registro
-boton_iniciar = tk.Button(marco_inicio, text="Iniciar registro", command=iniciar_registro)
-boton_iniciar.pack()
+# Instrucciones de ayuda
+fuente_ayuda = tkfont.Font(family="Arial", size=16)
+texto_ayuda = tk.Label(ventana, text="Diga \"REGISTRAR\" para comenzar el proceso de registro", font=fuente_ayuda, foreground="#6c757d")
+texto_ayuda.pack(pady=20)
 
-# Iniciar el bucle principal de la ventana
+# Botón para iniciar registro (opcional)
+# boton_iniciar = tk.Button(ventana, text="Iniciar registro", command=iniciar_registro)
+# boton_iniciar.pack(pady=20)
+
+# Ejecución de la interfaz
 ventana.mainloop()
