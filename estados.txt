@@ -1,0 +1,102 @@
+ESTADO INICIAL: 
+Texto principal: Preparado para registrar polipo
+Ayuda: Diga "REGISTRAR" para comenzar el registro de polipo
+
+ESTADO 2:
+Texto principal: Localizacion del polipo
+Ayuda: Diga los centimetros desde margen anal
+
+ESTADO 3:
+Texto principal: Tama;o en x del polipo
+Ayuda: Diga el tama;o estimado en milimetros
+
+ESTADO 4:
+Texto principal: Desea registrar el tama;o en y?
+Ayuda: Diga Si para introducir otra medida o No para continuar
+
+ESTADO 4.2:
+Texto principal: Tama;o en y del polipo
+Ayuda: Diga el tama;o estimado en milimetros
+
+ESTADO 5:
+Texto principal: 
+   Los datos recogidos son:
+      - Localizacion: L cm
+      - Tama;o X: x mm
+      (- Tama;o Y: y mm)
+   Desea agregar m'as parametros?
+Ayuda: Diga Si para introducir parametros extra o No para continuar
+
+ESTADO 6:
+Texto principal: 
+   Que parametro desea a;adir o modificar?
+      1. Patron mucoso: (Valor si ya est'a introducido)
+      2. Tipo de lesion (Valor si ya est'a introducido)
+      3. Clasificaci'on de paris (Valor si ya est'a introducido)
+      4. Continuar
+Ayuda: Diga el numero correspondiente a la opcion elegida. 
+ESTADO 6.1.1:
+Texto principal: Patron mucoso NICE
+Ayuda: Diga un numero entre las opciones 1, 2, 3
+
+
+ESTADO 6.1.2:
+Texto principal: Patron mucoso JNET
+Ayuda: Diga un numero entre las opciones 1, 2a, 2b, 3
+
+ESTADO 6.2:
+Texto principal: 
+    Tipo de lesion:
+        1. Polipo sesil
+        2. Lesion de extension lateral (LST)
+Ayuda: Diga el numero correspondiente a la opcion elegida
+
+ESTADO 6.3:
+Texto principal: 
+    Clasificacion de paris:
+        1. 0-Is
+        2. 0-Ip
+        3. 0-Isp
+        4. 0-IIa
+        5. 0-IIb
+        6. 0-IIc
+        7. mixto 0-IIa+Is
+        8. mixto 0-IIb+Is
+        9. mixto 0-IIc+Is
+        10. mixto 0-IIa+IIc
+        11. mixto 0-IIb+IIc
+Ayuda: Diga el numero correspondiente a la opcion elegida
+
+ESTADO 7:
+Texto principal: El polipo ha sido recuperado?
+Ayuda: Diga Si o No
+
+ESTADO 7.1:
+Texto principal: 
+    Introduzca que parametros sobre la extraccion desea a;adir o modificar
+        1. Numero de fragmentos (Valor si ya est'a introducido)
+        2. Metodo de reseccion
+        3. Continuar
+Ayuda: Diga el numero correspondiente a la opcion elegida
+
+ESTADO 7.1.1:
+Texto principal: Numero de fragmentos
+Ayuda: Diga el numero de fragmentos extraidos
+
+ESTADO 7.1.2:
+Texto principal: 
+    Metodo de reseccion
+        1. Pinza fría
+        2. Asa fría
+        3. Inyección y asa caliente
+        4. Precorte
+        5. Continuar
+Ayuda: Diga el numero correspondiente a la opcion elegida
+
+ESTADO 8:
+Texto principal: Enviando polipo...
+
+ESTADO 9: 
+Texto principal: Polipo enviado con exito.
+
+
