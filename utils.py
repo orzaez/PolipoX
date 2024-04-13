@@ -10,22 +10,43 @@ def iniciar_grabadora():
     p = pyaudio.PyAudio()
     stream = p.open(format=pyaudio.paInt16,
                     channels=2,
-                    rate=96000,
+                    rate=48000,
                     input=True,
                     frames_per_buffer=1024)
     return p, stream
 
+# def grabar_audio(address, filename, duration, p, stream):
+#     wf = wave.open(filename, "wb")
+#     wf.setnchannels(2)
+#     wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
+#     wf.setframerate(96000)
+
+#     for i in range(int(duration * 96000 / 1024)):
+#         data = stream.read(1024)
+#         wf.writeframes(data)
+
+#     wf.close()
+
 def grabar_audio(address, filename, duration, p, stream):
-    wf = wave.open(filename, "wb")
-    wf.setnchannels(2)
-    wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
-    wf.setframerate(96000)
+  wf = wave.open(filename, "wb")
+  wf.setnchannels(2)
+  wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
+  wf.setframerate(48000)
 
-    for i in range(int(duration * 96000 / 1024)):
-        data = stream.read(1024)
-        wf.writeframes(data)
+  audio_chunks = []
+  
+  for i in range(int(duration * 48000 / 1024)):
+    data = stream.read(1024)
+    if max(data) < 100:
+      continue 
+    audio_chunks.append(data)
 
-    wf.close()
+  if not audio_chunks:
+    return False
+
+  wf.writeframes(b''.join(audio_chunks))
+  wf.close()
+  return True
 
 def cerrar_grabadora(p, stream):
     stream.stop_stream()
