@@ -86,7 +86,7 @@ def transcode_audio(filename):
     file = {'audio_file': open(filename, 'rb')}
 
     # Enviar la petición HTTP al servidor
-    response = requests.post('http://ec2-3-90-230-145.compute-1.amazonaws.com:8080/transcribe', files=file)
+    response = requests.post('http://ec2-54-146-9-195.compute-1.amazonaws.com:8080/transcribe', files=file)
 
     # Procesar la respuesta
     if response.status_code == 200:
