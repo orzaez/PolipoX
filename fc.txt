@@ -1,0 +1,39 @@
+Tengo un proceso productor de audios 
+```
+def producer():
+  while True:
+    timestamp = generar_timestamp()
+    grabar_audio(address, "./temp/" + timestamp + ".wav", duration)
+
+    cola.put("./temp/" + timestamp + ".wav")
+```
+
+
+Que llama a la funcion grabar_audio
+
+```
+def grabar_audio(address, filename, duration):
+    p = pyaudio.PyAudio()
+    stream = p.open(format=pyaudio.paInt16,
+                    channels=2,
+                    rate=96000,
+                    input=True,
+                    frames_per_buffer=1024)
+
+    wf = wave.open(filename, "wb")
+    wf.setnchannels(2)
+    wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
+    wf.setframerate(96000)
+
+    for i in range(int(duration * 96000 / 1024)):
+        data = stream.read(1024)
+        wf.writeframes(data)
+
+    wf.close()
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+
+```
+
+En lugar de abrir y cerrar el stream y abrir y cerrar el wave, que lo deje abierto y vaya sacando audios de 3 segundos de manera mas eficiente
