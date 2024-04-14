@@ -14,9 +14,12 @@ def producer():
   try:
     while True:
       timestamp = generar_timestamp()
-      grabar_audio(address, "./temp/" + timestamp + ".wav", duration, p, stream)
+      not_empty = grabar_audio(address, "./temp/" + timestamp + ".wav", duration, p, stream)
+      if not_empty:
+        cola.put("./temp/" + timestamp + ".wav")
+      else:
+        os.remove("./temp/" + timestamp + ".wav")
 
-      cola.put("./temp/" + timestamp + ".wav")
       if not signal_event.is_set():
         signal_event.set()
 
@@ -39,6 +42,7 @@ def consumer():
           filename = cola.get()
           os.remove(filename)
         ui_queue.put("NEXT_STATE")
+
     else:
        signal_event.wait()
        signal_event.clear()
@@ -63,7 +67,7 @@ def producer_consumer():
 if __name__ == "__main__":
     address = "C8:9B:D7:DD:B0:E8"  
     filename = "./temp/grabacion.wav"
-    duration = 3
+    duration = 2
 
     producer_consumer_thread = threading.Thread(target=producer_consumer)
     

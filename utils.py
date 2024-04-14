@@ -94,7 +94,7 @@ def transcode_audio(filename):
         print(transcribed_text)
         return transcribed_text
     else:
-        print(f'Error al transcribir el audio: {response.status_code}')
+        return ""
 
 def decode_transcription(transcription):  
   cadena_mayusculas = transcription.upper()
