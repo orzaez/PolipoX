@@ -27,38 +27,12 @@ lesion_type = tk.StringVar()
 paris_classification = tk.StringVar()
 num_fragments = tk.StringVar()
 resection_method = tk.StringVar()
-
-location_label = tk.Label(window, textvariable=location, font=("Arial", 12))
-size_x_label = tk.Label(window, textvariable=size_x, font=("Arial", 12))
-size_y_label = tk.Label(window, textvariable=size_y, font=("Arial", 12))
-mucosal_pattern_label = tk.Label(window, textvariable=mucosal_pattern, font=("Arial", 12))
-lesion_type_label = tk.Label(window, textvariable=lesion_type, font=("Arial", 12))
-paris_classification_label = tk.Label(window, textvariable=paris_classification, font=("Arial", 12))
-num_fragments_label = tk.Label(window, textvariable=num_fragments, font=("Arial", 12))
-resection_method_label = tk.Label(window, textvariable=resection_method, font=("Arial", 12))
-
-mucosal_pattern_nice_entry = tk.Entry(window)
-mucosal_pattern_jnet_entry = tk.Entry(window)
-lesion_type_entry = tk.Entry(window)
-paris_classification_entry = tk.Entry(window)
-num_fragments_entry = tk.Entry(window)
-resection_method_entry = tk.Entry(window)
+mucosal_pattern_nice = tk.StringVar()
+mucosal_pattern_jnet = tk.StringVar()
 
 def update_ui(state_value):
     state = state_value
 
-    location_label.pack_forget()
-    size_x_label.pack_forget()
-    size_y_label.pack_forget()
-    mucosal_pattern_label.pack_forget()
-    mucosal_pattern_nice_entry.pack_forget()
-    mucosal_pattern_jnet_entry.pack_forget()
-    lesion_type_label.pack_forget()
-    lesion_type_entry.pack_forget()
-    paris_classification_label.pack_forget()
-    paris_classification_entry.pack_forget()
-    num_fragments_entry.pack_forget()
-    resection_method_entry.pack_forget()
 
     if state == 0:
         main_text.set("Preparado para registrar pólipo")
@@ -67,76 +41,80 @@ def update_ui(state_value):
     elif state == 1:
         main_text.set("Localización del pólipo")
         help_text.set("Diga los centímetros desde margen anal")
-        location_label.pack(pady=10)
 
     elif state == 2:
         main_text.set(f"""El polipo esta a {location.get()} cm del margen anal?""")
         help_text.set("Diga Si para continuar o No volver a introducir el dato")
-        location_label.pack(pady=10)
-
 
     elif state == 3:
         main_text.set("Tamaño en X del pólipo")
         help_text.set("Diga el tamaño estimado en milímetros")
-        size_x_label.pack(pady=10)
 
     elif state == 4:
+        main_text.set(f"""El tamaño en x del polipo esta a {size_x.get()} mm?""")
+        help_text.set("Diga Si para continuar o No volver a introducir el dato")
+
+
+    elif state == 5:
         main_text.set("¿Desea registrar el tamaño en Y?")
         help_text.set("Diga Si para introducir otra medida o No para continuar")
 
-    elif state == 5:
+    elif state == 6:
         main_text.set("Tamaño en Y del pólipo")
         help_text.set("Diga el tamaño estimado en milímetros")
-        size_y_label.pack(pady=10)
+        
+    
+    elif state == 7:
+        main_text.set(f"""El tamaño en y del polipo esta a {size_y.get()} mm?""")
+        help_text.set("Diga Si para continuar o No volver a introducir el dato")
 
-    elif state == 6:
+    elif state == 8:
         main_text.set(
             f"""
             Los datos recogidos son:
                 - Localización: {location.get()} cm
                 - Tamaño X: {size_x.get()} mm
-                (- Tamaño Y: {size_y.get()} mm)
+                - Tamaño Y: {size_y.get()} mm
             ¿Desea agregar más parámetros?
             """
         )
         help_text.set("Diga Si para introducir parámetros extra o No para continuar")
-        location_label.pack(pady=10)
-        size_x_label.pack(pady=10)
-        if size_y.get():
-            size_y_label.pack(pady=10)
+        
 
-    elif state == 7:
+    elif state == 9:
         main_text.set(
             f"""
             ¿Qué parámetro desea añadir o modificar?
-                1. Patrón mucoso: NICE: {(mucosal_pattern_nice_entry.get() if mucosal_pattern_nice_entry.get() else "-")}, JNET: {(mucosal_pattern_jnet_entry.get() if mucosal_pattern_jnet_entry.get() else "-")} 
-                2. Tipo de lesión: {(lesion_type_entry.get() if lesion_type_entry.get() else "-")}
-                3. Clasificación de París: {(paris_classification_entry.get() if paris_classification_entry.get() else "-")}
-                4. Continuar
+                1. Patrón mucoso NICE: {(mucosal_pattern_nice.get() if mucosal_pattern_nice.get() else "-")} 
+                2. Patrón mucoso JNET: {(mucosal_pattern_jnet.get() if mucosal_pattern_jnet.get() else "-")} 
+                3. Tipo de lesión: {(lesion_type.get() if lesion_type.get() else "-")}
+                4. Clasificación de París: {(paris_classification.get() if paris_classification.get() else "-")}
+                5. Continuar
             """
         )
         help_text.set("Diga el número correspondiente a la opción elegida.")
-        mucosal_pattern_label.pack(pady=5)
-        mucosal_pattern_nice_entry.pack(pady=5)
-        mucosal_pattern_jnet_entry.pack(pady=5)
-        lesion_type_label.pack(pady=5)
-        lesion_type_entry.pack(pady=5)
-        paris_classification_label.pack(pady=5)
-        paris_classification_entry.pack(pady=5)
-
-    elif state == 8:
-        main_text.set("Patrón mucoso")
-        help_text.set("¿Elegir método NICE o JNET?")
-
-    elif state == 9:
-        main_text.set("Patrón mucoso NICE")
-        help_text.set("Diga un número entre las opciones 1, 2, 3")
+      
 
     elif state == 10:
-        main_text.set("Patrón mucoso JNET")
-        help_text.set("Diga un número entre las opciones 1, 2a, 2b, 3")
+        main_text.set("""
+                      Patrón mucoso
+                        1. NICE 1    
+                        2. NICE 2
+                        3. NICE 3
+                      """)
+        help_text.set("Diga el número correspondiente a la opción elegida")
 
     elif state == 11:
+        main_text.set("""
+                      Patrón mucoso
+                        1. JNET 1    
+                        2. JNET 2a
+                        3. JNET 2b
+                        4. JNET 3
+                      """)
+        help_text.set("Diga el número correspondiente a la opción elegida")
+
+    elif state == 12:
         main_text.set(
             """
             Tipo de lesión:
@@ -146,7 +124,7 @@ def update_ui(state_value):
         )
         help_text.set("Diga el número correspondiente a la opción elegida.")
 
-    elif state == 12: 
+    elif state == 13: 
         main_text.set(
             """
             Clasificación de París:
@@ -160,29 +138,30 @@ def update_ui(state_value):
         )
         help_text.set("Diga el número correspondiente a la opción elegida.")
 
-    elif state == 13:
+    elif state == 14:
         main_text.set("El pólipo ha sido recuperado?")
         help_text.set("Diga Si o No")
 
-    elif state == 14:
+    elif state == 15:
         main_text.set(
             f"""
             Introduzca que parametros sobre la extraccion desea añadir o modificar
-                1. Numero de fragmentos {(num_fragments_entry.get() if num_fragments_entry.get() else "-")}
-                2. Método de resección {(resection_method_entry.get() if resection_method_entry.get() else "-")}
+                1. Numero de fragmentos {(num_fragments.get() if num_fragments.get() else "-")}
+                2. Método de resección {(resection_method.get() if resection_method.get() else "-")}
                 3. Continuar
             """
         )
         help_text.set("Diga el número correspondiente a la opción elegida.")
 
-        num_fragments_entry.pack(pady=5)
-        resection_method_entry.pack(pady=5)
-
-    elif state == 15:
+    elif state == 16:
         main_text.set("Número de fragmentos")
         help_text.set("Diga el número de fragmentos extraidos")
+    
+    elif state == 17:
+        main_text.set(f"""El número de fragmentos es {num_fragments.get()} ?""")
+        help_text.set("Diga Si para continuar o No volver a introducir el dato")
 
-    elif state == 16:
+    elif state == 18:
         main_text.set(
             """
             Método de resección:
@@ -190,15 +169,14 @@ def update_ui(state_value):
                 2. Asa fría
                 3. Inyección y asa caliente
                 4. Precorte
-                5. Continuar
             """
         )
         help_text.set("Diga el número correspondiente a la opción elegida.")
 
-    elif state == 17:
+    elif state == 19:
         main_text.set("Enviando pólipo...")
 
-    elif state == 18:
+    elif state == 20:
        main_text.set("Pólipo enviado con éxito.")
 
 

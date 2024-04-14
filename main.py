@@ -1,5 +1,5 @@
-from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription, check_there_is_command
-from ui import window, state, update_ui, location
+from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription
+from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments
 import multiprocessing
 import threading
 import os
@@ -70,6 +70,57 @@ def producer_consumer():
           if("SET_LOCATION" in ui_command):
             location.set(ui_command.split(" ")[-1])
             update_ui(state.get())
+          if("SET_SIZE_X" in ui_command):
+            size_x.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+
+          if("SET_NICE" in ui_command):
+            mucosal_pattern_nice.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+
+          if("SET_JNET" in ui_command):
+            mucosal_pattern_jnet.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+
+          if("SET_LESION" in ui_command):
+            lesion = "Pólipo sesil" if ui_command.split(" ")[-1] == "1" else "Lesión de extensión lateral (LST)"
+            lesion_type.set(lesion)
+            update_ui(state.get())
+
+          if("SET_NUM_FRAGMENTS" in ui_command):
+            num_fragments.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+
+          if("SET_PARIS" in ui_command):
+            argument = ui_command.split(" ")[-1]
+            paris = "-"
+
+            if argument == "1":
+              paris = "0-Is"
+            elif argument == "2":
+              paris = "0-Ip"
+            elif argument == "3":
+              paris = "0-Isp"
+            elif argument == "4":
+              paris = "0-IIa"
+            elif argument == "5":
+              paris = "0-IIb"
+            elif argument == "6":
+              paris = "0-IIc"
+            elif argument == "7":
+              paris = "mixto 0-IIa+Is"
+            elif argument == "8":
+              paris = "mixto 0-IIb+Is"
+            elif argument == "9":
+              paris = "mixto 0-IIc+Is"
+            elif argument == "10":
+              paris = "mixto 0-IIa+IIc"
+            elif argument == "11":
+              paris = "mixto 0-IIb+IIc"
+
+            paris_classification.set(paris)
+            update_ui(state.get())
+
           if("BRANCH" in ui_command):
             state.set(ui_command.split(" ")[-1])
             update_ui(state.get())
