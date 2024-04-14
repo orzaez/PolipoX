@@ -12,7 +12,7 @@ logo_label.pack(pady=20)
 main_text = tk.StringVar()
 help_text = tk.StringVar()
 
-state = tk.IntVar(value=1)
+state = tk.IntVar(value=0)
 
 main_text_label = tk.Label(window, textvariable=main_text, font=("Arial", 16, "bold"))
 main_text_label.pack(pady=20)
@@ -60,14 +60,20 @@ def update_ui(state_value):
     num_fragments_entry.pack_forget()
     resection_method_entry.pack_forget()
 
-    if state == 1:
+    if state == 0:
         main_text.set("Preparado para registrar pólipo")
         help_text.set("Diga 'REGISTRAR' para comenzar el registro de pólipo")
 
-    elif state == 2:
+    elif state == 1:
         main_text.set("Localización del pólipo")
         help_text.set("Diga los centímetros desde margen anal")
         location_label.pack(pady=10)
+
+    elif state == 2:
+        main_text.set(f"""El polipo esta a {location.get()} cm del margen anal?""")
+        help_text.set("Diga Si para continuar o No volver a introducir el dato")
+        location_label.pack(pady=10)
+
 
     elif state == 3:
         main_text.set("Tamaño en X del pólipo")

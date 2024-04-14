@@ -1,9 +1,11 @@
 from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription, check_there_is_command
-from ui import window, state, update_ui
+from ui import window, state, update_ui, location
 import multiprocessing
 import threading
 import os
 import time
+from states import StateMachine
+
 
 cola = multiprocessing.Queue()
 ui_queue = multiprocessing.Queue()
@@ -31,18 +33,22 @@ def producer():
 def consumer():
   pid = os.getpid()
   os.system("sudo renice -n -19 -p " + str(pid))
+  state_machine = StateMachine()
+
   while True:
     if not cola.empty():
       filename = cola.get()
       transcription = transcode_audio(filename)
       os.remove(filename)
       decoded_transcription = decode_transcription(transcription)
-      if(check_there_is_command("REGISTRAR", decoded_transcription)):
+      there_is_command, commands = state_machine.check_command(decoded_transcription)
+      if(there_is_command):
         while not cola.empty():
           filename = cola.get()
           os.remove(filename)
-        ui_queue.put("NEXT_STATE")
 
+        for command in commands:
+          ui_queue.put(command)
     else:
        signal_event.wait()
        signal_event.clear()
@@ -57,8 +63,15 @@ def producer_consumer():
     while True:
         if not ui_queue.empty():
           ui_command = ui_queue.get()
+          print(ui_command)
           if(ui_command == "NEXT_STATE"):
             state.set(state.get() + 1)
+            update_ui(state.get())
+          if("SET_LOCATION" in ui_command):
+            location.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+          if("BRANCH" in ui_command):
+            state.set(ui_command.split(" ")[-1])
             update_ui(state.get())
              
 
@@ -67,7 +80,7 @@ def producer_consumer():
 if __name__ == "__main__":
     address = "C8:9B:D7:DD:B0:E8"  
     filename = "./temp/grabacion.wav"
-    duration = 2
+    duration = 4
 
     producer_consumer_thread = threading.Thread(target=producer_consumer)
     
