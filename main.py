@@ -1,11 +1,11 @@
 from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription
-from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments, resection_method
+from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments, resection_method, subtitles
 import multiprocessing
 import threading
 import os
 import time
 from states import StateMachine
-
+import re
 
 cola = multiprocessing.Queue()
 ui_queue = multiprocessing.Queue()
@@ -49,6 +49,8 @@ def consumer():
 
         for command in commands:
           ui_queue.put(command)
+
+      ui_queue.put(f"""SET_SUBTITLES {decoded_transcription}""")
     else:
        signal_event.wait()
        signal_event.clear()
@@ -70,6 +72,11 @@ def producer_consumer():
           if("SET_LOCATION" in ui_command):
             location.set(ui_command.split(" ")[-1])
             update_ui(state.get())
+
+          if("SET_SUBTITLES" in ui_command):
+            subtitles.set(re.sub(r"\A\w+\s", "", ui_command))
+            update_ui(state.get())
+            
           if("SET_SIZE_X" in ui_command):
             size_x.set(ui_command.split(" ")[-1])
             update_ui(state.get())
@@ -126,27 +133,13 @@ def producer_consumer():
             resection_method_argument = "-"
 
             if argument == "1":
-              resection_method_argument = "0-Is"
+              resection_method_argument = "Pinza fría"
             elif argument == "2":
-              resection_method_argument = "0-Ip"
+              resection_method_argument = "Asa fría"
             elif argument == "3":
-              resection_method_argument = "0-Isp"
+              resection_method_argument = "Inyección y asa caliente"
             elif argument == "4":
-              resection_method_argument = "0-IIa"
-            elif argument == "5":
-              resection_method_argument = "0-IIb"
-            elif argument == "6":
-              resection_method_argument = "0-IIc"
-            elif argument == "7":
-              resection_method_argument = "mixto 0-IIa+Is"
-            elif argument == "8":
-              resection_method_argument = "mixto 0-IIb+Is"
-            elif argument == "9":
-              resection_method_argument = "mixto 0-IIc+Is"
-            elif argument == "10":
-              resection_method_argument = "mixto 0-IIa+IIc"
-            elif argument == "11":
-              resection_method_argument = "mixto 0-IIb+IIc"
+              resection_method_argument = "Precorte"
 
             resection_method.set(resection_method_argument)
             update_ui(state.get())

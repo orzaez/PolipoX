@@ -1,6 +1,6 @@
 class StateMachine():
     commands = [
-        ["REGISTRO"],
+        ["INICIO"],
         ["LOCATION"],
         ["LOCATION_CONFIRMATION"],
         ["SIZE_X"],
@@ -23,7 +23,7 @@ class StateMachine():
     ]
 
     ui_actions = {
-        "REGISTRO": ["NEXT_STATE"],
+        "INICIO": ["NEXT_STATE"],
         "LOCATION": ["SET_LOCATION", "NEXT_STATE"],
         "LOCATION_CONFIRMATION": ["BRANCH"],
         "SIZE_X": ["SET_SIZE_X", "NEXT_STATE"],
@@ -46,7 +46,7 @@ class StateMachine():
     }
 
     next_states = {
-        "REGISTRO": 1,
+        "INICIO": 1,
         "LOCATION": 2,
         "LOCATION_CONFIRMATION": 3,
         "SIZE_X": 4,
@@ -55,15 +55,16 @@ class StateMachine():
         "SIZE_Y": 7,
         "SIZE_Y_CONFIRMATION": 8,
         "CHOOSE_IS_MORE_PARAMS": 9,
-        "NICE": 10,
-        "JNET": 11,
-        "LESION": 12,
-        "PARIS": 13,
-        "RECOVER": 14,
-        "CHOOSE_RECOVERY_PARAMS_TO_ADD_MODIFY": 15,
-        "NUM_FRAGMENTS": 16,
-        "NUM_FRAGMENTS_CONFIRMATION": 17,
-        "RESECTION_METHOD": 18,
+        "CHOOSE_PARAM_TO_ADD_MODIFY": 10,
+        "NICE": 11,
+        "JNET": 12,
+        "LESION": 13,
+        "PARIS": 14,
+        "RECOVER": 15,
+        "CHOOSE_RECOVERY_PARAMS_TO_ADD_MODIFY": 16,
+        "NUM_FRAGMENTS": 17,
+        "NUM_FRAGMENTS_CONFIRMATION": 18,
+        "RESECTION_METHOD": 19,
         "SEND_DATA": 0,
     }
 
@@ -127,7 +128,7 @@ class StateMachine():
         if command == "NUM_FRAGMENTS_CONFIRMATION":
             confirm = True if " SÍ " in transcription or " SI " in transcription else False if " NO " in transcription else None
             if confirm is not None:
-                self.set_branch(confirm, "NUM_FRAGMENTS_CONFIRMATION", 0, 15, self.curr_state - 1)
+                self.set_branch(confirm, "NUM_FRAGMENTS_CONFIRMATION", 0, self.curr_state - 2, self.curr_state - 1)
                 return True
             
         if command == "CHOOSE_IF_SIZE_Y":
@@ -186,7 +187,7 @@ class StateMachine():
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2" or digits == "3":
                 self.set_nice_argument(digits)
-                self.set_branch(True, "NICE", 0, 9, 9)
+                self.set_branch(True, "NICE", 1, 9, 9)
                 return True
             else:
                 return False
@@ -195,7 +196,7 @@ class StateMachine():
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2" or digits == "3" or digits == "4":
                 self.set_jnet_argument(digits)
-                self.set_branch(True, "JNET", 0, 9, 9)
+                self.set_branch(True, "JNET", 1, 9, 9)
                 return True
             else:
                 return False
@@ -204,7 +205,7 @@ class StateMachine():
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2":
                 self.set_lesion_argument(digits)
-                self.set_branch(True, "LESION", 0, 9, 9)
+                self.set_branch(True, "LESION", 1, 9, 9)
                 return True
             else:
                 return False
@@ -213,7 +214,7 @@ class StateMachine():
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2" or digits == "3" or digits == "4" or digits == "5" or digits == "6" or digits == "7" or digits == "8" or digits == "9" or digits == "10" or digits == "11":
                 self.set_paris_argument(digits)
-                self.set_branch(True, "PARIS", 0, 9, 9)
+                self.set_branch(True, "PARIS", 1, 9, 9)
                 return True
             else:
                 return False
@@ -222,7 +223,7 @@ class StateMachine():
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2" or digits == "3" or digits == "4":
                 self.set_resection_method_argument(digits)
-                self.set_branch(True, "RESECTION_METHOD", 0, 15, 15)
+                self.set_branch(True, "RESECTION_METHOD", 1, 15, 15)
                 return True
             else:
                 return False
@@ -263,25 +264,3 @@ class StateMachine():
     def set_branch(self, confirm, command, index, state_yes, state_no):
         self.next_states[command] = state_yes if confirm else state_no
         self.ui_actions[command][index] = f"""{self.ui_actions[command][index]} {state_yes if confirm else state_no}"""
-        
-    # def check_number_in_words(self, transcription):
-    #     numbers_in_words = {
-    #         "one": 1,
-    #         "two": 2,
-    #         "three": 3,
-    #         "four": 4,
-    #         "five": 5,
-    #         "six": 6,
-    #         "seven": 7,
-    #         "eight": 8,
-    #         "nine": 9,
-    #         "ten": 10,
-    #         "hundred": 100,
-    #         "thousand": 1000,
-    #         "fifty": 50,
-    #     }
-    #     sum_of_numbers = 0
-    #     for word in transcription.split():
-    #         if word.lower() in numbers_in_words:
-    #             sum_of_numbers += numbers_in_words[word.lower()]
-    #     return sum_of_numbers > 0

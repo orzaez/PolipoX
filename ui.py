@@ -11,6 +11,7 @@ logo_label.pack(pady=20)
 
 main_text = tk.StringVar()
 help_text = tk.StringVar()
+subtitles = tk.StringVar()
 
 state = tk.IntVar(value=0)
 
@@ -19,6 +20,11 @@ main_text_label.pack(pady=20)
 
 help_text_label = tk.Label(window, textvariable=help_text, font=("Arial", 12))
 help_text_label.pack(pady=20)
+
+
+subtitles_label = tk.Label(window, textvariable=subtitles, font=("Arial", 12))
+subtitles_label.pack(pady=20)
+
 location = tk.StringVar()
 size_x = tk.StringVar()
 size_y = tk.StringVar()
@@ -146,8 +152,8 @@ def update_ui(state_value):
         main_text.set(
             f"""
             Introduzca que parametros sobre la extraccion desea añadir o modificar
-                1. Numero de fragmentos {(num_fragments.get() if num_fragments.get() else "-")}
-                2. Método de resección {(resection_method.get() if resection_method.get() else "-")}
+                1. Numero de fragmentos: {(num_fragments.get() if num_fragments.get() else "-")}
+                2. Método de resección: {(resection_method.get() if resection_method.get() else "-")}
                 3. Continuar
             """
         )

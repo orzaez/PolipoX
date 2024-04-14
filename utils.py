@@ -88,11 +88,9 @@ def transcode_audio(filename):
     # Enviar la petición HTTP al servidor
     response = requests.post('http://ec2-3-250-224-87.eu-west-1.compute.amazonaws.com:8080/transcribe', files=file)
 
-    print(response)
     # Procesar la respuesta
     if response.status_code == 200:
         transcribed_text =  response.json()["text"]
-        print(transcribed_text)
         return transcribed_text
     else:
         return ""
@@ -101,7 +99,9 @@ def decode_transcription(transcription):
   cadena_mayusculas = transcription.upper()
   without_sign = cadena_mayusculas.replace(",", "").replace(".","").replace("?","").replace("!","").replace("¿", "").replace("¡", "")
   
-  return " " + without_sign + " "
+  numbers_with_digits = without_sign.replace("UNO", "1").replace("DOS", "2").replace("TRES", "3").replace("CUATRO", "4").replace("CINCO", "5").replace("SEIS", "6").replace("SIETE", "7").replace("OCHO", "8").replace("NUEVE", "9").replace("DIEZ", "10").replace("ONCE", "11").replace("DOCE", "12")
+
+  return " " + numbers_with_digits + " "
 
 def check_there_is_command(command, decoded_transcription):
     return command in decoded_transcription
