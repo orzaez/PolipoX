@@ -246,14 +246,7 @@ class StateMachine():
         self.ui_actions["RESECTION_METHOD"][0] = self.ui_actions["RESECTION_METHOD"][0] + " " + number
 
     def set_jnet_argument(self, number):
-        jnet = number
-        if number == "2":
-            jnet = "2a"
-        elif number == "3":
-            jnet = "2b"
-        elif number == "4":
-            jnet = "3"
-        self.ui_actions["NICE"][0] = self.ui_actions["NICE"][0] + " " + jnet
+        self.ui_actions["NICE"][0] = self.ui_actions["NICE"][0] + " " + number
 
     def set_lesion_argument(self, number):
         self.ui_actions["LESION"][0] = self.ui_actions["LESION"][0] + " " + number

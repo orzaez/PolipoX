@@ -90,6 +90,7 @@ def transcode_audio(filename):
 
     # Procesar la respuesta
     if response.status_code == 200:
+        print(response.json())
         transcribed_text =  response.json()["text"]
         return transcribed_text
     else:
@@ -99,7 +100,7 @@ def decode_transcription(transcription):
   cadena_mayusculas = transcription.upper()
   without_sign = cadena_mayusculas.replace(",", "").replace(".","").replace("?","").replace("!","").replace("¿", "").replace("¡", "")
   
-  numbers_with_digits = without_sign.replace("UNO", "1").replace("DOS", "2").replace("TRES", "3").replace("CUATRO", "4").replace("CINCO", "5").replace("SEIS", "6").replace("SIETE", "7").replace("OCHO", "8").replace("NUEVE", "9").replace("DIEZ", "10").replace("ONCE", "11").replace("DOCE", "12")
+  numbers_with_digits = without_sign.replace("SINCO", "5").replace("UNO", "1").replace("DOS", "2").replace("TRES", "3").replace("CUATRO", "4").replace("CINCO", "5").replace("SEIS", "6").replace("SIETE", "7").replace("OCHO", "8").replace("NUEVE", "9").replace("DIEZ", "10").replace("ONCE", "11").replace("DOCE", "12")
 
   return " " + numbers_with_digits + " "
 

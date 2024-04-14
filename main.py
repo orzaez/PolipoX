@@ -1,5 +1,5 @@
 from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription
-from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments, resection_method, subtitles
+from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments, resection_method, subtitles, size_y
 import multiprocessing
 import threading
 import os
@@ -81,12 +81,24 @@ def producer_consumer():
             size_x.set(ui_command.split(" ")[-1])
             update_ui(state.get())
 
+          if("SET_SIZE_Y" in ui_command):
+            size_y.set(ui_command.split(" ")[-1])
+            update_ui(state.get())
+
           if("SET_NICE" in ui_command):
             mucosal_pattern_nice.set(ui_command.split(" ")[-1])
             update_ui(state.get())
 
           if("SET_JNET" in ui_command):
-            mucosal_pattern_jnet.set(ui_command.split(" ")[-1])
+            arguments = ui_command.split(" ")[-1]
+            jnet = arguments
+            if arguments == "2":
+                jnet = "2a"
+            elif arguments == "3":
+                jnet = "2b"
+            elif arguments == "4":
+                jnet = "3"
+            mucosal_pattern_jnet.set(jnet)
             update_ui(state.get())
 
           if("SET_LESION" in ui_command):
