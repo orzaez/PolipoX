@@ -19,6 +19,7 @@ class StateMachine():
         ["NUM_FRAGMENTS"],
         ["NUM_FRAGMENTS_CONFIRMATION"],
         ["RESECTION_METHOD"],
+        ["SEND_DATA"],
     ]
 
     ui_actions = {
@@ -41,6 +42,7 @@ class StateMachine():
         "NUM_FRAGMENTS": ["SET_NUM_FRAGMENTS", "NEXT_STATE"],
         "NUM_FRAGMENTS_CONFIRMATION": ["BRANCH"],
         "RESECTION_METHOD": ["SET_RESECTION_METHOD", "BRANCH"],
+        "SEND_DATA": ["SEND_DATA"],
     }
 
     next_states = {
@@ -62,6 +64,7 @@ class StateMachine():
         "NUM_FRAGMENTS": 16,
         "NUM_FRAGMENTS_CONFIRMATION": 17,
         "RESECTION_METHOD": 18,
+        "SEND_DATA": 0,
     }
 
     def __init__(self) -> None:
@@ -76,6 +79,9 @@ class StateMachine():
         return False, ""
     
     def check_there_is_command(self, command, transcription):
+        if command == "SEND_DATA":
+            return True
+
         if command == "LOCATION":
             digits = ''.join(c for c in transcription if c.isdigit())
             has_number = bool(digits)
@@ -215,8 +221,8 @@ class StateMachine():
         if command == "RESECTION_METHOD":
             digits = ''.join(c for c in transcription if c.isdigit())
             if digits == "1" or digits == "2" or digits == "3" or digits == "4":
-                self.set_jnet_argument(digits)
-                self.set_branch(True, "RESECTION_METHOD", 0, 9, 9)
+                self.set_resection_method_argument(digits)
+                self.set_branch(True, "RESECTION_METHOD", 0, 15, 15)
                 return True
             else:
                 return False
@@ -234,6 +240,9 @@ class StateMachine():
     
     def set_nice_argument(self, number):
         self.ui_actions["NICE"][0] = self.ui_actions["NICE"][0] + " " + number
+
+    def set_resection_method_argument(self, number):
+        self.ui_actions["RESECTION_METHOD"][0] = self.ui_actions["RESECTION_METHOD"][0] + " " + number
 
     def set_jnet_argument(self, number):
         jnet = number

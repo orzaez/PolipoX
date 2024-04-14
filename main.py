@@ -1,5 +1,5 @@
 from utils import cerrar_grabadora, iniciar_grabadora, grabar_audio, generar_timestamp, transcode_audio, decode_transcription
-from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments
+from ui import window, state, update_ui, location, size_x, mucosal_pattern_nice, mucosal_pattern_jnet, lesion_type, paris_classification, num_fragments, resection_method
 import multiprocessing
 import threading
 import os
@@ -121,9 +121,42 @@ def producer_consumer():
             paris_classification.set(paris)
             update_ui(state.get())
 
+          if("SET_RESECTION_METHOD" in ui_command):
+            argument = ui_command.split(" ")[-1]
+            resection_method_argument = "-"
+
+            if argument == "1":
+              resection_method_argument = "0-Is"
+            elif argument == "2":
+              resection_method_argument = "0-Ip"
+            elif argument == "3":
+              resection_method_argument = "0-Isp"
+            elif argument == "4":
+              resection_method_argument = "0-IIa"
+            elif argument == "5":
+              resection_method_argument = "0-IIb"
+            elif argument == "6":
+              resection_method_argument = "0-IIc"
+            elif argument == "7":
+              resection_method_argument = "mixto 0-IIa+Is"
+            elif argument == "8":
+              resection_method_argument = "mixto 0-IIb+Is"
+            elif argument == "9":
+              resection_method_argument = "mixto 0-IIc+Is"
+            elif argument == "10":
+              resection_method_argument = "mixto 0-IIa+IIc"
+            elif argument == "11":
+              resection_method_argument = "mixto 0-IIb+IIc"
+
+            resection_method.set(resection_method_argument)
+            update_ui(state.get())
+
           if("BRANCH" in ui_command):
             state.set(ui_command.split(" ")[-1])
             update_ui(state.get())
+
+          if("SEND_DATA" in ui_command):
+            print("ENVIANDO DATAPACK")
              
 
 

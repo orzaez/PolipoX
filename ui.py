@@ -176,8 +176,6 @@ def update_ui(state_value):
     elif state == 19:
         main_text.set("Enviando pólipo...")
 
-    elif state == 20:
-       main_text.set("Pólipo enviado con éxito.")
 
 
 
