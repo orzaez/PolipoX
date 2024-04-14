@@ -1,13 +1,18 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 window = tk.Tk()
 window.title("Registro de voz")
 # window.attributes("-fullscreen", True)
 window.geometry("+{}+{}".format(0, 0))
+window.configure(background="white")
+
+
 
 logo_image = tk.PhotoImage(file="images/logo.png")
 logo_label = tk.Label(window, image=logo_image)
 logo_label.pack(pady=20)
+logo_label.configure(background="white")
 
 main_text = tk.StringVar()
 help_text = tk.StringVar()
@@ -18,15 +23,36 @@ state = tk.IntVar(value=0)
 
 main_text_label = tk.Label(window, textvariable=main_text, font=("Arial", 16, "bold"))
 main_text_label.pack(pady=20)
+main_text_label.configure(background="white")
 
 help_text_label = tk.Label(window, textvariable=help_text, font=("Arial", 12))
 help_text_label.pack(pady=20)
+help_text_label.configure(background="white")
 
-subtitles_text_label = tk.Label(window, textvariable=example_text, font=("Arial", 12))
-subtitles_text_label.pack(pady=20)
 
-subtitles_label = tk.Label(window, textvariable=subtitles, font=("Arial", 12))
-subtitles_label.pack(pady=20)
+image=Image.open("images/microphone.png")
+img=image.resize((20,20))
+microphone_icon = ImageTk.PhotoImage(img)
+
+
+
+microphone_label = tk.Label(window, 
+                           textvariable=subtitles, 
+                           compound=tk.LEFT, 
+                           padx=10, 
+                           font=("Arial", 12),
+                           image=microphone_icon)
+
+microphone_label.pack(side=tk.BOTTOM, fill=tk.X)
+microphone_label.configure(background="white")
+
+
+# subtitles_text_label = tk.Label(window, textvariable=example_text, font=("Arial", 12))
+# subtitles_text_label.pack(pady=20)
+# subtitles_text_label.configure(background="white")
+
+# subtitles_label = tk.Label(window, textvariable=subtitles, font=("Arial", 12))
+# subtitles_label.pack(pady=20)
 
 location = tk.StringVar()
 size_x = tk.StringVar()
