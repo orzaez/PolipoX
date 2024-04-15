@@ -23,7 +23,7 @@ class StateMachine():
     ]
 
     ui_actions = {
-        "INICIO": ["NEXT_STATE"],
+        "INICIO": ["BRANCH"],
         "LOCATION": ["SET_LOCATION", "NEXT_STATE"],
         "LOCATION_CONFIRMATION": ["BRANCH"],
         "SIZE_X": ["SET_SIZE_X", "NEXT_STATE"],
@@ -111,6 +111,12 @@ class StateMachine():
             confirm = True if " SÍ " in transcription or " SI " in transcription else False if " NO " in transcription else None
             if confirm is not None:
                 self.set_branch(confirm, "LOCATION_CONFIRMATION", 0, self.curr_state + 1, self.curr_state - 1)
+                return True
+            
+        if command == "INICIO":
+            confirm = True if " SÍ " in transcription or " SI " in transcription else None
+            if confirm is not None:
+                self.set_branch(True, "INICIO", 0, self.curr_state + 1, self.curr_state + 1)
                 return True
             
         if command == "SIZE_X_CONFIRMATION":
@@ -228,7 +234,7 @@ class StateMachine():
             else:
                 return False
             
-        return command in transcription
+        return False
     
     def set_location_argument(self, number):
         self.ui_actions["LOCATION"][0] = self.ui_actions["LOCATION"][0] + " " + number

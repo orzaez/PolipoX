@@ -1,6 +1,6 @@
 from ui import state, update_ui, window, subtitles
 
-state.set()
-subtitles.set(9)
+state.set(11)
+subtitles.set(11)
 update_ui(state.get())
 window.mainloop()
