@@ -117,7 +117,6 @@ def update_ui(state_value):
     boton10_text.set("")
     boton11_text.set("")
     boton12_text.set("")
-    help_text.set("")
     button_frame.pack_forget()
     boton1.grid_forget()
     boton2.grid_forget()
@@ -286,6 +285,8 @@ def update_ui(state_value):
     elif state == 14:
         main_text.set("El pólipo ha sido recuperado?")
         help_text.set("Diga Si o No")
+        example_text.set("")
+        example_text_label.pack(pady=20)
 
     elif state == 15:
         main_text.set(f"Introduzca que parámetros sobre la extracción\n" 
@@ -309,11 +310,13 @@ def update_ui(state_value):
         main_text.set("Número de fragmentos")
         help_text.set("Diga '<NÚMERO> fragmentos'")
         example_text.set("Ejemplo:'2 fragmentos'")
-        # example_text_label.pack(pady=20)
+        example_text_label.pack(pady=20)
     
     elif state == 17:
         main_text.set(f"""El número de fragmentos es {num_fragments.get()} ?""")
         help_text.set("Diga Si para continuar o No para volver a introducir el dato")
+        example_text.set("")
+        example_text_label.pack(pady=20)
 
     elif state == 18:
         main_text.set("Método de resección:"
@@ -338,6 +341,8 @@ def update_ui(state_value):
 
     elif state == 19:
         main_text.set("Enviando pólipo...")
+        example_text.set("")
+        example_text_label.pack(pady=20)
 
 
 

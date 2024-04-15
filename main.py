@@ -162,8 +162,27 @@ def producer_consumer():
 
           if("SEND_DATA" in ui_command):
             print("ENVIANDO DATAPACK")
+            send_data(
+                      location,
+                      size_x,
+                      size_y,
+                      lesion_type,
+                      paris_classification,
+                      num_fragments,
+                      resection_method,
+                      mucosal_pattern_nice,
+                      mucosal_pattern_jnet)
              
-
+def send_data(location,
+                      size_x,
+                      size_y,
+                      lesion_type,
+                      paris_classification,
+                      num_fragments,
+                      resection_method,
+                      mucosal_pattern_nice,
+                      mucosal_pattern_jnet):
+  pass
 
 
 if __name__ == "__main__":
