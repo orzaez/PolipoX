@@ -98,7 +98,7 @@ class StateMachine():
         if command == "SIZE_Y":
             digits = ''.join(c for c in transcription if c.isdigit())
             has_number = bool(digits)
-            self.set_size_x_argument(digits)
+            self.set_size_y_argument(digits)
             return has_number
         
         if command == "NUM_FRAGMENTS":
@@ -236,17 +236,20 @@ class StateMachine():
     def set_size_x_argument(self, number):
         self.ui_actions["SIZE_X"][0] = self.ui_actions["SIZE_X"][0] + " " + number
 
+    def set_size_y_argument(self, number):
+        self.ui_actions["SIZE_Y"][0] = self.ui_actions["SIZE_Y"][0] + " " + number
+
     def set_num_fragments_argument(self, number):
         self.ui_actions["NUM_FRAGMENTS"][0] = self.ui_actions["NUM_FRAGMENTS"][0] + " " + number
     
     def set_nice_argument(self, number):
         self.ui_actions["NICE"][0] = self.ui_actions["NICE"][0] + " " + number
 
+    def set_jnet_argument(self, number):
+        self.ui_actions["JNET"][0] = self.ui_actions["JNET"][0] + " " + number
+
     def set_resection_method_argument(self, number):
         self.ui_actions["RESECTION_METHOD"][0] = self.ui_actions["RESECTION_METHOD"][0] + " " + number
-
-    def set_jnet_argument(self, number):
-        self.ui_actions["NICE"][0] = self.ui_actions["NICE"][0] + " " + number
 
     def set_lesion_argument(self, number):
         self.ui_actions["LESION"][0] = self.ui_actions["LESION"][0] + " " + number

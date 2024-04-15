@@ -3,16 +3,19 @@ from PIL import Image, ImageTk
 
 window = tk.Tk()
 window.title("Registro de voz")
-# window.attributes("-fullscreen", True)
+window.attributes("-fullscreen", True)
 window.geometry("+{}+{}".format(0, 0))
 window.configure(background="white")
 
 
+image_logo=Image.open("images/logo.png")
+#logo_image = tk.PhotoImage(file="images/logo.png")
+#logo_label = tk.Label(window, image=logo_image)
+#logo_label.pack()
+#image_logo.configure(background="white")
+image_lore=image_logo.resize((10,10))
+imagenicom = ImageTk.PhotoImage(image_lore)
 
-logo_image = tk.PhotoImage(file="images/logo.png")
-logo_label = tk.Label(window, image=logo_image)
-logo_label.pack(pady=20)
-logo_label.configure(background="white")
 
 main_text = tk.StringVar()
 help_text = tk.StringVar()
@@ -31,7 +34,7 @@ help_text_label.configure(background="white")
 
 
 image=Image.open("images/microphone.png")
-img=image.resize((20,20))
+img=image.resize((15,15))
 microphone_icon = ImageTk.PhotoImage(img)
 
 
@@ -40,10 +43,11 @@ microphone_label = tk.Label(window,
                            textvariable=subtitles, 
                            compound=tk.LEFT, 
                            padx=10, 
+                           pady=20,
                            font=("Arial", 12),
                            image=microphone_icon)
 
-microphone_label.pack(side=tk.BOTTOM, fill=tk.X)
+microphone_label.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
 microphone_label.configure(background="white")
 
 
