@@ -36,6 +36,10 @@ main_text_label = tk.Label(window, textvariable=main_text, font=("Inter", 25, "b
 main_text_label.pack(pady=20)
 main_text_label.configure(background="white")
 
+main2text_label = tk.Label(window, textvariable=main_text, font=("Inter", 30, "bold"))
+main2text_label.pack(pady=20)
+main2text_label.configure(background="white")
+
 boton1_text = tk.StringVar()
 boton2_text = tk.StringVar()
 boton3_text = tk.StringVar()
@@ -49,17 +53,18 @@ boton10_text = tk.StringVar()
 boton11_text = tk.StringVar()
 boton12_text = tk.StringVar()
 
-
-
-
 help_text_label = tk.Label(window, textvariable=help_text, font=("Inter", 12))
 help_text_label.pack(pady=20)
 help_text_label.configure(background="white")
 
+help2_text_label = tk.Label(window, textvariable=help_text, font=("Inter", 15))
+help2_text_label.pack(pady=20)
+help2_text_label.configure(background="white")
+
 
 
 image=Image.open("images/microphone.png")
-img=image.resize((30,30))
+img=image.resize((25,25))
 microphone_icon = ImageTk.PhotoImage(img)
 
 
@@ -69,28 +74,28 @@ microphone_label = tk.Label(window,
                            compound=tk.LEFT, 
                            padx=10, 
                            pady=20,
-                           font=("Inter", 25),
+                           font=("Inter", 15),
                            image=microphone_icon)
 
 microphone_label.pack(side=tk.BOTTOM, pady=10)
 microphone_label.configure(background="white")
 
-example_text_label = tk.Label(window, textvariable=example_text, font=("Inter", 12))
+example_text_label = tk.Label(window, textvariable=example_text, font=("Inter", 14))
 example_text_label.configure(background="white")
 button_frame = tk.Frame(window, bg="white")
 button_frame.pack()
 
-boton1 = tk.Button(button_frame, textvariable=boton1_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton2 = tk.Button(button_frame, textvariable=boton2_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton3 = tk.Button(button_frame, textvariable=boton3_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton4 = tk.Button(button_frame, textvariable=boton4_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton5 = tk.Button(button_frame, textvariable=boton5_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton6 = tk.Button(button_frame, textvariable=boton6_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton7 = tk.Button(button_frame, textvariable=boton7_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton8 = tk.Button(button_frame, textvariable=boton8_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton9 = tk.Button(button_frame, textvariable=boton9_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton10 = tk.Button(button_frame, textvariable=boton10_text, bg="white", justify="left",width=30,borderwidth=0.1)
-boton11 = tk.Button(button_frame, textvariable=boton11_text, bg="white", justify="left",width=30,borderwidth=0.1)
+boton1 = tk.Button(button_frame, textvariable=boton1_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton2 = tk.Button(button_frame, textvariable=boton2_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton3 = tk.Button(button_frame, textvariable=boton3_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton4 = tk.Button(button_frame, textvariable=boton4_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton5 = tk.Button(button_frame, textvariable=boton5_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton6 = tk.Button(button_frame, textvariable=boton6_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton7 = tk.Button(button_frame, textvariable=boton7_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton8 = tk.Button(button_frame, textvariable=boton8_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton9 = tk.Button(button_frame, textvariable=boton9_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton10 = tk.Button(button_frame, textvariable=boton10_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
+boton11 = tk.Button(button_frame, textvariable=boton11_text, bg="white", justify="left",width=40,borderwidth=0.1, font=("Inter", 10))
     
 location = tk.StringVar()
 size_x = tk.StringVar()
@@ -129,55 +134,78 @@ def update_ui(state_value):
     boton9.grid_forget()
     boton10.grid_forget()
     boton11.grid_forget()
-    
+    main_text_label.pack_forget()
+    main2text_label.pack_forget()
+    help_text_label.pack_forget()
+    help2_text_label.pack_forget()
+    example_text_label.pack_forget()
+
 
     if state == 0:
         main_text.set("Preparado para registrar pólipo")
-        help_text.set("Diga 'Si' para comenzar el registro de pólipo")
-    
+        help_text.set("Diga 'Sí' para comenzar el registro de pólipo")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
+
     elif state == 1:
         main_text.set("Localización del pólipo")
         help_text.set("Diga '<MEDIDA> centimetros'")
-        example_text.set("Ejemplo: '20 centimetros'")
-        # example_text_label.pack(pady=20)
+        example_text.set("Ejemplo: '12 centimetros'")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20) 
+        example_text_label.pack(pady=20)
 
     elif state == 2:
-        main_text.set(f"""El polipo esta a {location.get()} cm del margen anal?""")
-        help_text.set('Diga "Si" para continuar o "No" para volver a introducir el dato')
+        main_text.set(f"""¿El polipo esta a {location.get()} cm del margen anal?""")
+        help_text.set('Diga "Sí" para continuar o "No" para volver a introducir el dato')
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
 
     elif state == 3:
         main_text.set("Tamaño en X del pólipo")
         help_text.set("Diga '<MEDIDA> milímetros'")
-        example_text.set("Ejemplo: '20 milílimetros'")
-        # example_text_label.pack(pady=20)
+        example_text.set("Ejemplo: '9 milílimetros'")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
+        example_text_label.pack(pady=20)
 
     elif state == 4:
-        main_text.set(f"""El tamaño en x del polipo esta a {size_x.get()} mm?""")
-        help_text.set('Diga "Si" para continuar o "No" para volver a introducir el dato')
-
+        main_text.set(f"""¿El tamaño en X del polipo es de {size_x.get()} mm?""")
+        help_text.set('Diga "Sí" para continuar o "No" para volver a introducir el dato')
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
 
     elif state == 5:
         main_text.set("¿Desea registrar el tamaño en Y?")
-        help_text.set('Diga "Si" para continuar o "No" para volver a introducir el dato')
+        help_text.set('Diga "Sí" para continuar o "No" para volver a introducir el dato')
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
 
     elif state == 6:
         main_text.set("Tamaño en Y del pólipo")
         help_text.set("Diga '<MEDIDA> milímetros'")
-        example_text.set("Ejemplo: '15 milímetros'")
-        # example_text_label.pack(pady=20)
+        example_text.set("Ejemplo: '13 milímetros'")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
+        example_text_label.pack(pady=20)
         
     
     elif state == 7:
-        main_text.set(f"""El tamaño en y del polipo esta a {size_y.get()} mm?""")
-        help_text.set('Diga "Si" para continuar o "No" volver a introducir el dato')
+        main_text.set(f"""¿El tamaño en Y del polipo es de {size_y.get()} mm?""")
+        help_text.set('Diga "Sí" para continuar o "No" volver a introducir el dato')
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
 
     elif state == 8:
         main_text.set(f"""Los datos recogidos son:""")
         help_text.set(f"""¿Desea agregar más parámetros?""")
-        example_text.set('Diga "Si" para introducir parámetros extra o "No" para continuar')
+        example_text.set('Diga "Sí" para introducir parámetros extra o "No" para continuar')
         boton1_text.set(f"""Localización: {location.get()} cm""") 
         boton2_text.set(f"""Tamaño X: {size_x.get()} mm""") 
         boton3_text.set(f"""Tamaño Y: {size_y.get()} mm""")
+        
+        main_text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
         boton1.grid(row=0, column=0, padx=5, pady=5,sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5,sticky="w")
@@ -188,23 +216,23 @@ def update_ui(state_value):
     elif state == 9:
         main_text.set(f"""¿Qué parámetro desea añadir o modificar?""")
         help_text.set("Diga 'Opción <NÚMERO>'.")
-        example_text.set("Ejemplo: 'Opción 5'")
+        example_text.set("Ejemplo: 'Opción 2'")
         
         boton1_text.set(f"""1. Patrón mucoso NICE: {(mucosal_pattern_nice.get() if mucosal_pattern_nice.get() else "-")}""") 
         boton2_text.set(f"""2. Patrón mucoso JNET: {(mucosal_pattern_jnet.get() if mucosal_pattern_jnet.get() else "-")}""") 
         boton3_text.set(f"""3. Tipo de lesión: {(lesion_type.get() if lesion_type.get() else "-")}""")
         boton4_text.set(f"""4. Clasificación de Paris: {(paris_classification.get() if paris_classification.get() else "-")}""")
         boton5_text.set(f"""5. Continuar""")
+        main_text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
         boton1.grid(row=0, column=0, padx=5, pady=5,sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5,sticky="w")
         boton3.grid(row=2, column=0, padx=5, pady=5,sticky="w")
         boton4.grid(row=3, column=0, padx=5, pady=5,sticky="w")
         boton5.grid(row=4, column=0, padx=5, pady=5,sticky="w")
-        
         example_text_label.pack(pady=20)
 
-      
 
     elif state == 10:
         main_text.set(f"""Patrón mucoso""")
@@ -214,6 +242,8 @@ def update_ui(state_value):
         boton1_text.set(f"""1. NICE 1""") 
         boton2_text.set(f"""2. NICE 2""") 
         boton3_text.set(f"""3. NICE 3""")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
         boton1.grid(row=0, column=0, padx=5, pady=5,sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5,sticky="w")
@@ -229,25 +259,27 @@ def update_ui(state_value):
         boton3_text.set(f"""3. JNET 2b""")
         boton4_text.set(f"""4. JNET 3""")
 
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
-
         boton1.grid(row=0, column=0, padx=5, pady=5,sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5,sticky="w")
         boton3.grid(row=2, column=0, padx=5, pady=5,sticky="w")
         boton4.grid(row=3, column=0, padx=5, pady=5,sticky="w")
         example_text_label.pack(pady=20)
-        # example_text_label.pack(pady=20)
 
     elif state == 12:
         main_text.set("""Tipo de lesión:""")
         help_text.set("Diga 'Opcion <NÚMERO>'")
         example_text.set("Ejemplo: 'Opción 2'")
-        button_frame.pack()
-        boton1_text.set(f"""1. Pólipo sesil """) 
+        boton1_text.set(f"""1. Pólipo sésil """) 
         boton2_text.set(f"""2. Lesión de extensión lateral (LST)""")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
+        button_frame.pack()
         boton1.grid(row=0, column=0, padx=5, pady=5,sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5,sticky="w")
-        # example_text_label.pack(pady=20)
+        example_text_label.pack(pady=20)
 
     elif state == 13: 
         main_text.set(f"""Clasificación de Paris:""")
@@ -267,6 +299,8 @@ def update_ui(state_value):
         boton10_text.set(f""" 10. mixto 0-IIa+IIc""")
         boton11_text.set(f"""11. mixto 0-IIb+IIc""")
         
+        main_text_label.pack(pady=20)
+        help_text_label.pack(pady=20)
         button_frame.pack()
         
         boton1.grid(row=0, column=0, padx=5, pady=5, sticky="w")
@@ -283,8 +317,10 @@ def update_ui(state_value):
         example_text_label.pack(pady=20)
 
     elif state == 14:
-        main_text.set("El pólipo ha sido recuperado?")
-        help_text.set("Diga Si o No")
+        main_text.set("¿El pólipo ha sido recuperado?")
+        help_text.set("Diga Sí o No")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         example_text.set("")
         example_text_label.pack(pady=20)
 
@@ -295,37 +331,47 @@ def update_ui(state_value):
         boton2_text.set(f"""2. Método de resección: {(resection_method.get() if resection_method.get() else "-")}""")
         boton3_text.set("3. Continuar: ")
 
+       
+        
+        help_text.set("Diga 'Opcion <NÚMERO>'")
+        example_text.set("Ejemplo: 'Opción 3'")
+        main_text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
          
         boton1.grid(row=0, column=0, padx=5, pady=5, sticky="w")
         boton2.grid(row=1, column=0, padx=5, pady=5, sticky="w")
         boton3.grid(row=2, column=0, padx=5, pady=5, sticky="w")
-       
-        
-        help_text.set("Diga 'Opcion <NÚMERO>'")
-        example_text.set("Ejemplo: 'Opción 3'")
         example_text_label.pack(pady=20)
         
     elif state == 16:
         main_text.set("Número de fragmentos")
         help_text.set("Diga '<NÚMERO> fragmentos'")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         example_text.set("Ejemplo:'2 fragmentos'")
         example_text_label.pack(pady=20)
     
     elif state == 17:
-        main_text.set(f"""El número de fragmentos es {num_fragments.get()} ?""")
-        help_text.set("Diga Si para continuar o No para volver a introducir el dato")
+        main_text.set(f"""¿El número de fragmentos es de {num_fragments.get()}?""")
+        help_text.set("Diga Sí para continuar o No para volver a introducir el dato")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         example_text.set("")
         example_text_label.pack(pady=20)
 
     elif state == 18:
-        main_text.set("Método de resección:"
-        )
+        main_text.set("Método de resección:")
         boton1_text.set("1. Pinza fría") 
         boton2_text.set("2. Asa fría") 
         boton3_text.set("3. Inyección y asa caliente")
         boton4_text.set("4. Precorte")
         
+
+       
+        help_text.set("Diga 'Opción <NÚMERO>'")
+        main2text_label.pack(pady=20)
+        help2_text_label.pack(pady=20)
         button_frame.pack()
 
 
@@ -333,17 +379,13 @@ def update_ui(state_value):
         boton2.grid(row=1, column=0, padx=5, pady=5, sticky="w")
         boton3.grid(row=2, column=0, padx=5, pady=5, sticky="w")
         boton4.grid(row=3, column=0, padx=5, pady=5, sticky="w")
-
-       
-        help_text.set("Diga 'Opción <NÚMERO>'")
         example_text.set("Ejemplo: 'Opción 2'")
         example_text_label.pack(pady=20)
 
     elif state == 19:
         main_text.set("Enviando pólipo...")
         example_text.set("")
-        example_text_label.pack(pady=20)
-
+        main2text_label.pack(pady=20)
 
 
 
