@@ -1,7 +1,7 @@
 
 
 # Polipox
-[Demostración de Polipox](https://github.com/orzaez/PolipoX/blob/master/images/GIF_Polipox.gif)
+![](https://github.com/orzaez/PolipoX/blob/master/images/GIF_Polipox.gif)
 
 ## Descripción
 
