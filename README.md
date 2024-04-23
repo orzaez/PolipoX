@@ -18,13 +18,6 @@ El proyecto consiste en un dispositivo que permite realizar un registro en tiemp
 
 - **Interfaz Intuitiva**: Tanto el dispositivo como la plataforma web cuentan con interfaces diseñadas para ser intuitivas y de fácil uso, lo que facilita su adopción por parte del personal médico.
 
-## Instalación y Uso
-
-### Requisitos
-
-- Python 3
-- FasterWhisper
-
 ## Descripción Técnica
 
 A continuación explicaremos el lado técnico de PolipoX, centrándonos en el hardware, software y arquitectura que compone nuestro sistema.
