@@ -23,7 +23,7 @@ El proyecto consiste en un dispositivo que permite realizar un registro en tiemp
 A continuación explicaremos el lado técnico de PolipoX, centrándonos en el hardware, software y arquitectura que compone nuestro sistema.
 
 ### Hardware
-![](https://github.com/orzaez/PolipoX/blob/master/images/hadware.png)
+![](https://github.com/orzaez/PolipoX/blob/master/images/hardware.png)
 
 Para el hardware nos hemos decantado por una Raspberry Pi 5 con 4 GB de RAM para ser capaz de soportar el motor de UI y el servidor VNC.
 
