@@ -18,13 +18,6 @@ El proyecto consiste en un dispositivo que permite realizar un registro en tiemp
 
 - **Interfaz Intuitiva**: Tanto el dispositivo como la plataforma web cuentan con interfaces diseñadas para ser intuitivas y de fácil uso, lo que facilita su adopción por parte del personal médico.
 
-## Instalación y Uso
-
-### Requisitos
-
-- Python 3
-- FasterWhisper
-
 ## Descripción Técnica
 
 A continuación explicaremos el lado técnico de PolipoX, centrándonos en el hardware, software y arquitectura que compone nuestro sistema.
@@ -57,6 +50,8 @@ Se planean las siguientes mejoras para el proyecto:
 - **Volcar Diagnóstico Revisado por el Clínico a la Base de Datos Diraya**: Integrar el diagnóstico del médico en la plataforma para un acceso más completo al historial del paciente.
 
 
+<!--
+
 
 1. Clona este repositorio:
 2. Creación y activación de un entorno vistual
@@ -64,3 +59,4 @@ python3 -m venv venv (buscar en google como crear venv con python)
 source ./venv/bin/activate
 3. Instalacion de los requisitos
 python3 -m pip install -f ./requirements.txt
+-->
