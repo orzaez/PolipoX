@@ -1,6 +1,6 @@
 
 
-# Polipox
+# Polipox ![](https://github.com/orzaez/PolipoX/blob/master/images/logo.png)
 ![](https://github.com/orzaez/PolipoX/blob/master/images/GIF_Polipox.gif)
 
 ## Descripción
