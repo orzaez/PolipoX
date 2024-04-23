@@ -1,7 +1,8 @@
 
 
 # Polipox
-https://github.com/orzaez/PolipoX/blob/master/images/GIF_Polipox.gif
+[Demostración de Polipox](https://github.com/orzaez/PolipoX/blob/master/images/GIF_Polipox.gif)
+
 ## Descripción
 
 Polipox es un proyecto desarrollado para el área digestiva del Hospital Reina Sofía de Córdoba. Surge de la necesidad de facilitar el registro de las características de los pólipos durante las colonoscopias, una tarea que resultaba difícil para los clínicos.
