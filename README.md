@@ -23,10 +23,12 @@ El proyecto consiste en un dispositivo que permite realizar un registro en tiemp
 A continuación explicaremos el lado técnico de PolipoX, centrándonos en el hardware, software y arquitectura que compone nuestro sistema.
 
 ### Hardware
+![](https://github.com/orzaez/PolipoX/blob/master/images/hadware.png)
 
 Para el hardware nos hemos decantado por una Raspberry Pi 5 con 4 GB de RAM para ser capaz de soportar el motor de UI y el servidor VNC.
 
 ### Software
+![](https://github.com/orzaez/PolipoX/blob/master/images/software.png)
 
 Nuestro sistema se compone de dos subsistemas complementarios:
 
@@ -34,6 +36,7 @@ Nuestro sistema se compone de dos subsistemas complementarios:
 - **Plataforma Web**: Permite al clínico visualizar la información de las distintas exploraciones y los pólipos encontrados en cada una de ellas.
 
 ### Arquitectura
+![](https://github.com/orzaez/PolipoX/blob/master/images/arquitectura.png)
 
 La arquitectura de PolipoX funciona de la siguiente manera:
 
